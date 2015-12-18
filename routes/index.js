@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var unirest = require('unirest');
-var keys = require('/Users/joshsilverstein/workspace/express/express-introduction/faceAnalyzer/configure.js');
 var server = require('../serverIndex.js')
 /* GET home page. */
 router.get('/', function(req, res, next) {
