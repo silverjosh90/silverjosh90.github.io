@@ -5,15 +5,16 @@ var unirest = require('unirest')
 function pullFacialInfo(response) {
   var info = []
   var data = response.body
-  if (data["face"][0] !== undefined) {
+  var hasElements = data["face"]
+  if (hasElements.length > 0) {
     var age = data["face"][0]["attribute"]["age"]
     info.push({"age":age})
   }
-  if (data["face"][0] !== undefined) {
+  if (hasElements.length > 0) {
     var gender = data["face"][0]["attribute"]["gender"]
     info.push({"gender": gender})
   }
-  if (data["face"][0] !== undefined) {
+  if (hasElements.length > 0) {
     var race = data["face"][0]["attribute"]["race"]
     info.push({"race": race})
   }
@@ -97,7 +98,7 @@ function makeItReadAble(x) {
   return faces
 }
 
-//test 
+//test
 
 
 
