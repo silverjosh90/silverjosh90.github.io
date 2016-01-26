@@ -14,7 +14,7 @@ body {
 }
 
 .frontSection {
-  background-image: url("https://images.unsplash.com/photo-1440557958969-404dc361d86f?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=9404042a3064b2bbb03f69f43f9938a9");
+  background-image: url("/images/faced.jpeg");
   background-size: cover;
   height: 97vh;
 }
