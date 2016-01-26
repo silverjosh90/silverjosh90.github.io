@@ -2,27 +2,36 @@ var unirest = require('unirest')
 
 
 
-function pullFacialInfo(response) {
-  var info = []
-  var data = response.body
-  var hasElements = data["face"]
-  if (hasElements.length > 0) {
-    var age = data["face"][0]["attribute"]["age"]
-    info.push({"age":age})
-  }
-  if (hasElements.length > 0) {
-    var gender = data["face"][0]["attribute"]["gender"]
-    info.push({"gender": gender})
-  }
-  if (hasElements.length > 0) {
-    var race = data["face"][0]["attribute"]["race"]
-    info.push({"race": race})
-  }
-  return info
-}
+// function pullFacialInfo(response) {
+//   var info = []
+//   var data = response.body
+// <<<<<<< HEAD
+//   var hasElements = data["face"]
+//   if (hasElements.length > 0) {
+//     var age = data["face"][0]["attribute"]["age"]
+//     info.push({"age":age})
+//   }
+//   if (hasElements.length > 0) {
+//     var gender = data["face"][0]["attribute"]["gender"]
+//     info.push({"gender": gender})
+//   }
+//   if (hasElements.length > 0) {
+// =======
+//   console.log(data['face'][0]);
+//   if (data["face"][0] !== undefined) {
+//     var age = data["face"][0]["attribute"]["age"]
+//     var gender = data["face"][0]["attribute"]["gender"]
+// >>>>>>> cfe3b2a
+//     var race = data["face"][0]["attribute"]["race"]
+//     info.push({"age":age})
+//     info.push({"gender": gender})
+//     info.push({"race": race})
+//   }
+//   return info
+// }
 
 function facePlus(face, callback) {
-  unirest.get('https://apius.faceplusplus.com/v2/detection/detect?url=' + face + '&api_secret=feLqtEaQo2FF5fwPMGrEsF3KTUYNhfE5&api_key=3a66b94f0a395a0cae0dc57451ff1375&attribute=glass,pose,gender,age,race,smiling')
+  unirest.get('https://apius.faceplusplus.com/v2/detection/detect?url=' + face + '&api_secret=17MjeURDf_CO82JYuWcDeJDGbSrvT0JC&api_key=3a66b94f0a395a0cae0dc57451ff1375&attribute=gender,age,race')
     .end(function(response) {
       return callback(response);
     });
