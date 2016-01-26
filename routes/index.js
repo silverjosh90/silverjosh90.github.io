@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 var unirest = require('unirest');
 var server = require('../serverIndex.js')
+var knex = require('../db/knex.js')
+var pg = require('pg')
+require('dotenv')
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
@@ -12,6 +15,8 @@ router.get('/', function(req, res, next) {
 
 router.post("/", function(req, res, next) {
   var blank = []
+  var searchTag = req.body.hashtag
+  server.databaseInsert(searchTag)
   var twitter = server.twitterCall(req.body.hashtag, function(response) {
     var ProfURL = server.urlFunc(response)
     var data = server.runFaceAPI(ProfURL, function(results) {
