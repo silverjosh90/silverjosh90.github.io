@@ -12,13 +12,13 @@ block content
     p(class="center indie") The smart way to learn about your consumers
     form(action="/" method="POST")
       input(type="text" class="hashtagSearch" name="hashtag" placeholder="enter a hashtag")
-      button(type="submit") search
-    .about
-      // h3(class='headerMiddle') About FaceIt
-      // p Founded in 2015. Face It uses facial recognition software to provide an unparalleled look at their costumers.
-    .provide
-      // h3 What Does face it provide
-      // p to offer businesses the most realistic information available.
+      button(type="submit" id="searchButton") search
+    
+    
+    
+    div(id="loadBar")
+      div(id="loader")
+    //-   h3(class='headerMiddle') About
     h1(class="hidden") #{info}
     br
     br

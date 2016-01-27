@@ -1,6 +1,29 @@
 #dataPresentation {
   padding-top: 15px;
 }
+
+@keyframes loading {
+  10% {
+    width: 5%;
+  }
+  25% {
+    width: 15%
+  }
+  40% {
+    width: 35%;
+  }
+
+  55% {
+    width: 75%;
+  }
+
+  90% {
+    width: 95%;
+  }
+
+}
+
+
 .container2 {
   background-image:  url("/images/faced.jpeg");
   background-size: cover;
@@ -74,4 +97,23 @@
   margin-left: 36%;
   opacity: 1;
   position: relative;
+}
+
+#loadBar {
+  display: none;
+  height: 15px;
+  width: 30%;
+  margin: 0 auto;
+  margin-top: 30px;
+  border-radius: 10px;
+  border: 1px solid black;
+}
+
+#loader {
+  display: none;
+  height: 15px;
+  width: 10%;
+  background-color: green;
+  border-radius: 10px;
+  animation: loading 1.9s infinite;
 }

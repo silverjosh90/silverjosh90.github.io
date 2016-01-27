@@ -1,3 +1,15 @@
+// var search = document.getElementById('searchButton');
+// var loadBar = document.getElementById('loadBar');
+// var loader = document.getElementById('loader');
+//
+// search.addEventListener("click", show)
+//
+// function show() {
+//   loadBar.style.display = "block"
+//   loader.style.display = "block"
+// }
+
+
   google.load('visualization', '1.0', {'packages':['corechart']});
 
   //google.setOnLoadCallback(drawAgeChart);

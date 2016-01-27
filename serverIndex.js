@@ -15,12 +15,71 @@ function databaseInsert(x) {
     }
   })
 }
-
-function databaseUpdate(passedThrough){
-  for (var i = 0; i < passThrough.length; i++) {
-    var j = passThrough[i]
-
+function dataFormat(passedThrough){
+  var aged = []
+  var gendered = []
+  var raced = []
+  var results = {}
+  for (var i = 0; i < passedThrough.length; i++) {
+    var j= passedThrough[i]
+    if(j['age'] !== undefined) {
+    var ages = j['age']['value'] / 10
+    var agev = Math.floor(ages)
+    aged.push(agev)
   }
+  if(j['gender'] !== undefined) {
+    var gend = j['gender']['value']
+    gendered.push(gend)
+  }
+  if(j['race'] !== undefined) {
+    var rac = j["race"]["value"]
+    raced.push(rac)
+  }
+  }
+  results.age = aged
+  results.gender = gendered
+  results.race = raced
+  console.log(results);
+  console.log(results.gender.length);
+
+}
+
+function putInDatabase(info) {
+  teen = 0
+  twenties = 0
+  thirties = 0
+  fourties = 0
+  fifties = 0
+  sixties = 0
+  if(info.age){
+    var aged = info.age
+    for (var i = 0; i < aged.length; i++) {
+      var singleAge = aged[i]
+      if(singleAge <= 1){
+        teen +=1
+      }
+      else if(singleAge <= 2){
+        twenties +=1
+      }
+      else if(singleAge <= 3){
+        thirties +=1
+      }
+      else if(singleAge <= 4){
+        fourties +=1
+      }
+      else if(singleAge <= 5){
+        fifties +=1
+      }
+      else if(singleAge <= 6){
+        sixties +=1
+      }
+    }
+    // var existing_values = companies().select().where('name', req.body.hashtag ).first().then(function(result1){
+    //   companies().update({teen: 0 , twenties: 0 , thirties: 0, forties: 0, fifties: 0, sixties: 0})
+    //
+    //   })
+    }
+
 
 }
 
@@ -28,7 +87,6 @@ function databaseUpdate(passedThrough){
 function pullFacialInfo(response) {
   var info = []
   var data = response.body
-  console.log(data['face'][0]);
   if (data["face"][0] !== undefined) {
     var age = data["face"][0]["attribute"]["age"]
     var gender = data["face"][0]["attribute"]["gender"]
@@ -37,6 +95,7 @@ function pullFacialInfo(response) {
     info.push({"gender": gender})
     info.push({"race": race})
     console.log(info);
+    dataFormat(info)
   }
   return info
 }
