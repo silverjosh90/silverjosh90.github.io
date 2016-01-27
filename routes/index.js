@@ -44,7 +44,8 @@ router.post("/", function(req, res, next) {
     results.age = aged
     results.gender = gendered
     results.race = raced
-    putInDatabase(results, req.body.hashtag)
+    ageDatabase(results, req.body.hashtag)
+    genderDatabase(results, req.body.hashtag)
 
   }
 
@@ -57,7 +58,7 @@ router.post("/", function(req, res, next) {
       }
     })
   }
-  function putInDatabase(info, compName) {
+  function ageDatabase(info, compName) {
     teen = 0
     twenties = 0
     thirties = 0
@@ -88,8 +89,6 @@ router.post("/", function(req, res, next) {
         }
       }
       companies().select().where('name', compName).first().then(function(result1){
-        console.log(compName);
-        console.log(result1);
         companies().where('name', compName).update({teen: result1.teen + teen , twenties: result1.twenties + twenties , thirties: result1.thirties + thirties, fourties: result1.fourties + fourties, fifties: result1.fifties + fifties, sixties: result1.sixties + sixties}).then(function(result){
 
         })
@@ -99,11 +98,28 @@ router.post("/", function(req, res, next) {
 
   }
 
+  function genderDatabase(info, compName) {
+    var male = 0
+    var female = 0
+    if(info.gender == 'Male'){
+      male +=1
+    }
+    else if(info.gender == 'Male'){
+      female +=1
+    }
+    companies().select().where('name', compName).first().then(function(result){
+      companies().where('name', compName).update({male: result.male + male, female: result.female + female}).then(function(rest){
+    });
+  });
+  }
+
 
   function pullFacialInfo(response) {
     var info = []
     var data = response.body
-    if (data["face"] !== undefined && data['face'][0] !== undefined) {
+    console.log( "GoldenBoy 1 "+data);
+    if (data["face"] !== undefined && data['face'].length) {
+      console.log(data['face'][0]);
       var age = data["face"][0]["attribute"]["age"]
       var gender = data["face"][0]["attribute"]["gender"]
       var race = data["face"][0]["attribute"]["race"]
@@ -111,7 +127,8 @@ router.post("/", function(req, res, next) {
       info.push({"gender": gender})
       info.push({"race": race})
 
-      dataFormat(info)
+      var formattedInfo = info
+      dataFormat(formattedInfo)
     }
     return info
   }
