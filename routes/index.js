@@ -46,6 +46,7 @@ router.post("/", function(req, res, next) {
     results.race = raced
     ageDatabase(results, req.body.hashtag)
     genderDatabase(results, req.body.hashtag)
+    raceDatabase(results, req.body.hashtag)
 
   }
 
@@ -97,6 +98,27 @@ router.post("/", function(req, res, next) {
       }
 
   }
+  function raceDatabase(info, compName) {
+    var black = 0
+    var white = 0
+    var asian = 0
+    if(info.race == 'Black'){
+      black +=1
+    }
+    else if(info.race == 'White'){
+      white +=1
+    }
+    else if(info.race == 'Asian'){
+      asian +=1
+    }
+    companies().select().where('name', compName).first().then(function(result){
+      companies().where('name', compName).update({black: result.black + black, white: result.white + white, asian: result.asian + asian}).then(function(rest){
+    });
+  });
+  }
+
+
+
 
   function genderDatabase(info, compName) {
     var male = 0
